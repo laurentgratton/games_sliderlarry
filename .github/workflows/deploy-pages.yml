@@ -26,6 +26,7 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.SUBMODULE_READ_TOKEN }}
+          persist-credentials: false
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
