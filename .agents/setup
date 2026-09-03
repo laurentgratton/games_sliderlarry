@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+log_step() {
+  local started_at=$SECONDS
+  printf '==> %s\n' "$1"
+  shift
+  "$@"
+  printf '<== completed in %ss\n' "$((SECONDS - started_at))"
+}
+
+cd "$repo_root"
+
+log_step "Synchronizing submodule configuration" git submodule sync --recursive
+log_step "Initializing game submodules" git submodule update --init --recursive
