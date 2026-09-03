@@ -13,6 +13,8 @@ concurrency:
 
 jobs:
   update-submodule:
+    environment:
+      name: github-pages
     runs-on: ubuntu-latest
     steps:
       - name: Check out site
