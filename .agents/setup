@@ -13,5 +13,6 @@ log_step() {
 
 cd "$repo_root"
 
+log_step "Configuring GitHub as the origin remote" git remote set-url origin https://github.com/laurentgratton/games_sliderlarry.git
 log_step "Synchronizing submodule configuration" git submodule sync --recursive
 log_step "Initializing game submodules" git submodule update --init --recursive

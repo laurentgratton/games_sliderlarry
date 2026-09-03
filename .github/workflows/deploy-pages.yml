@@ -31,8 +31,11 @@ jobs:
           persist-credentials: false
 
       - name: Refresh game releases
+        env:
+          SUBMODULE_READ_TOKEN: ${{ secrets.SUBMODULE_READ_TOKEN }}
         run: |
-          git submodule update --remote --recursive
+          auth_header="$(printf 'x-access-token:%s' "$SUBMODULE_READ_TOKEN" | base64 --wrap=0)"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth_header" submodule update --remote --recursive
           git submodule status --recursive
 
       - name: Configure Pages
