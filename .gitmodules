@@ -1,3 +1,4 @@
 [submodule "games/gardens-and-golems"]
 	path = games/gardens-and-golems
 	url = https://github.com/laurentgratton/gardens_and_golems.git
+	branch = main

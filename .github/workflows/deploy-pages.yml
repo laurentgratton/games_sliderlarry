@@ -3,6 +3,8 @@ name: Deploy site to GitHub Pages
 on:
   push:
     branches: [main]
+  repository_dispatch:
+    types: [game-release]
   workflow_dispatch:
 
 permissions:
@@ -27,6 +29,11 @@ jobs:
           submodules: recursive
           token: ${{ secrets.SUBMODULE_READ_TOKEN }}
           persist-credentials: false
+
+      - name: Refresh game releases
+        run: |
+          git submodule update --remote --recursive
+          git submodule status --recursive
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

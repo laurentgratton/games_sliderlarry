@@ -20,6 +20,8 @@ Open `http://localhost:8000` in a browser. Clone with `--recurse-submodules` (or
 
 ## Deploy to GitHub Pages
 
-The workflow at `.github/workflows/deploy-pages.yml` deploys the site on every push to `main` and can also be run manually. It checks out submodules recursively, so each game's files are included in the published site.
+The workflow at `.github/workflows/deploy-pages.yml` deploys the site on every push to `main`, when a game sends a `game-release` repository-dispatch event, and when run manually. Before publishing, it refreshes every submodule to the latest commit on its tracked branch, so a game release does not require a separate commit here just to update a submodule SHA.
+
+Each game's release workflow should send the `game-release` event to this repository after its release is published. For a game that should publish from a branch other than `main`, set its `branch` entry in `.gitmodules`. **Deploy site to GitHub Pages** can still be run manually from the repository's **Actions** tab when needed.
 
 In the GitHub repository, open **Settings → Pages** and set the source to **GitHub Actions** once. The next push to `main` will publish the showcase.
